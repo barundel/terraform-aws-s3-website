@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [1.1.0](https://github.com/barundel/terraform-aws-s3-website/compare/v1.0.1...v1.1.0) (2019-12-31)
+
+
+### Features
+
+* adding in rewrite lambda ([6ce7a26](https://github.com/barundel/terraform-aws-s3-website/commit/6ce7a2622ef30fa57af38bfca8c0b8fe2f718fb2))
+
 ## [1.0.1](https://github.com/barundel/terraform-aws-s3-website/compare/v1.0.0...v1.0.1) (2019-12-31)
 
 
