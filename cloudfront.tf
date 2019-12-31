@@ -7,6 +7,7 @@ resource "aws_cloudfront_distribution" "main" {
 
     s3_origin_config {
       origin_access_identity = element(aws_cloudfront_origin_access_identity.origin_access_identity.*.cloudfront_access_identity_path, 0)
+
     }
   }
 
@@ -33,10 +34,22 @@ resource "aws_cloudfront_distribution" "main" {
 
   aliases = [var.dns_name]
 
+//  dynamic "default_cache_behavior" {
+//
+//
+//  }
+
   default_cache_behavior {
     allowed_methods = var.default_cache_behavior_allowed_methods
     cached_methods = var.default_cache_behavior_cached_methods
     target_origin_id = var.origin_id
+
+
+
+    lambda_function_association {
+      event_type = "origin-request"
+      lambda_arn = "${element(aws_lambda_function.function.*.arn, 0)}:${element(aws_lambda_function.function.*.version, 0)}"
+    }
 
     forwarded_values {
       query_string = false

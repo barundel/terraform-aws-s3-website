@@ -63,6 +63,7 @@ variable "versioning" {
 variable "website" {
   description = "Website conflig block, index and error doc etc"
   default = {}
+  type = any
 }
 
 variable "server_side_encryption_configuration" {
