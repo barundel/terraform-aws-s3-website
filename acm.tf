@@ -32,6 +32,7 @@ resource aws_route53_record validation {
 }
 
 resource aws_acm_certificate_validation this {
+  provider = "aws.certificate"
   count                   = var.validation_method == "DNS" && var.validate_certificate ? 1 : 0
   certificate_arn         = aws_acm_certificate.this.arn
   validation_record_fqdns = aws_route53_record.validation.*.fqdn
