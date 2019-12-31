@@ -65,44 +65,7 @@ resource "aws_s3_bucket" "the_bucket" {
 
 }
 
-variable "create_bucket" {
-  description = "True or false to create the bucket, defaults to true"
-  default = true
-  type = any
-}
 
-variable "bucket_name" {
-  description = "Name of the S3 website bucket you want to create."
-  default = ""
-}
-
-variable "versioning" {
-  description = "Map of config for enabling versioning, defaults to enabled"
-  default = {
-    enabled = true
-  }
-}
-
-variable "website" {
-  description = "Website conflig block, index and error doc etc"
-  default = {}
-}
-
-variable "server_side_encryption_configuration" {
-  description = "encryption conflig block, aes, kms etc"
-  default = {}
-  type = any
-}
-
-variable "acl" {
-  description = "The bucket ACL to apply. Defaults to private"
-  default = "private"
-}
-
-variable "tags" {
-  description = "Map of tags to apply to the resource"
-  default = {}
-}
 
 output "s3_bucket_id" {
   description = "The name of the bucket."

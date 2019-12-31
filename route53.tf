@@ -1,18 +1,3 @@
-variable "create_dns_record" {
-  // This may fuck you up later ben
-  description = "True False on if to create dns record that points to cloudfront, defaults to true."
-  default = true
-}
-
-variable "dns_name" {
-  description = "Custom DNS name, works with var.create_dns_record or standalone"
-}
-
-variable "domain_lookup" {
-  description = "Domain to use as a data lookup for the hosted zone ID."
-  default = ""
-}
-
 data "aws_route53_zone" "zone" {
   provider = "aws.dns"
   count = var.create_dns_record ? 1 : 0
