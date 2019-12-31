@@ -171,3 +171,31 @@ resource "aws_cloudfront_distribution" "main" {
 //  }
 //  description = ""
 //}
+
+
+data "aws_iam_policy_document" "cf_s3_policy" {
+  statement {
+    actions   = ["s3:GetObject"]
+    resources = ["${element(aws_s3_bucket.the_bucket.*.arn, 0)}/*"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${element(aws_cloudfront_origin_access_identity.origin_access_identity.*.iam_arn, 0)}"]
+    }
+  }
+
+  statement {
+    actions   = ["s3:ListBucket"]
+    resources = ["${element(aws_s3_bucket.the_bucket.*.arn, 0)}"]
+
+    principals {
+      type        = "AWS"
+      identifiers = ["${element(aws_cloudfront_origin_access_identity.origin_access_identity.*.iam_arn, 0)}"]
+    }
+  }
+}
+
+resource "aws_s3_bucket_policy" "buckeet_policy" {
+  bucket = "${element(aws_s3_bucket.the_bucket.*.id, 0)}"
+  policy = "${data.aws_iam_policy_document.cf_s3_policy.json}"
+}
